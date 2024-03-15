@@ -1,0 +1,21 @@
+/* #e1f4fe light blue*/
+/* #481099 violet */
+/* #6673f0 dark blue*/
+
+#body{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #6673f0;
+    
+}
+
+.card {
+    width: 300px;
+}
+.btn-center {
+    display: flex;
+    justify-content: center;
+}
