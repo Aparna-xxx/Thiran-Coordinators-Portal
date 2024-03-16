@@ -5,7 +5,7 @@ const {login, home} = require('../controllers/loginController')
 
 
 Router.post('/',login)
-    .get('/home', home)
+      .get('/home', home)
 
 
 module.exports = Router

@@ -1,9 +1,5 @@
 const { admin } = require('../models/adminSchema');
-const express = require('express');
-const app = express();
-const ejs = require("ejs");
 
-app.set('view engine', 'ejs');
 
 exports.login = async (req, res) => {
     const { name, pwd } = req.body;
