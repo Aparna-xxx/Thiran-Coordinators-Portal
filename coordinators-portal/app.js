@@ -4,11 +4,14 @@ const {db} = require('./db')
 const bodyParser = require('body-parser')
 const route = require('./routes/route')
 
-const ejs=require("ejs");
-
 
 const app = express();
-const PORT = 3000;
+const PORT = 8000;
+
+const ejs = require("ejs");
+app.set('view engine', 'ejs');
+
+
 app.set('view engine', 'ejs');
 db();
 

@@ -7,9 +7,9 @@ const { winners } = require('../controllers/winnersControllers');
 
 
 Router.post('/',login)
-    .get('/home', home)
-    .get('/attendance',attendance)
-    .get('/winner',winners)
+      .get('/home', home)
+      .get('/attendance',attendance)
+      .get('/winner',winners)
 
 
 
