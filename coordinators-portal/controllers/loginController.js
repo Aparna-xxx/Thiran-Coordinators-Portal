@@ -7,6 +7,7 @@ app.set('view engine', 'ejs');
 
 exports.login = async (req, res) => {
     const { name, pwd } = req.body;
+    console.log(name,pwd)
 
     try {
         const valid = await admin.findOne({ name: name });

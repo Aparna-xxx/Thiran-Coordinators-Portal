@@ -6,9 +6,10 @@ const route = require('./routes/route')
 
 const ejs=require("ejs");
 
-const app = express();
-const PORT = 8000;
 
+const app = express();
+const PORT = 3000;
+app.set('view engine', 'ejs');
 db();
 
 const root = process.cwd();
@@ -17,6 +18,7 @@ console.log(root)
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use('/',route);
+
 
 app.use(express.static(path.join(root , 'public')))
 

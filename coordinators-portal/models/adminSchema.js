@@ -5,6 +5,6 @@ const adminSchema  = new mongoose.Schema({
     pwd:{type: String, required: true}
 })
 
-const admin = mongoose.model('admin', adminSchema)
+const admin = mongoose.model('coordinators', adminSchema)
 
 module.exports = {admin}
