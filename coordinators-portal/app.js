@@ -65,11 +65,17 @@ app.post("/",(req,res)=>{
 
 });
 
+app.post("/updateAttendance", (req, res)=>{
+    res.redirect("/attendance");
+})
+
 app.get("/home",(req,res)=>{
     res.render("details")
 });
 
-
+app.get("/attendance", (req, res)=>{
+    res.render("attendance")
+})
 
 app.listen(3000,()=>{
     console.log("Listening on port 3000");
