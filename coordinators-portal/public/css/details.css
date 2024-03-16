@@ -1,0 +1,38 @@
+/* #e1f4fe light blue*/
+/* #481099 violet */
+/* #6673f0 dark blue*/
+  
+body{
+    background-color:#6673f0 ;
+}
+
+.poppins-regular {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+.dropdown-menu-right {
+    right: 0;
+    left: auto;
+  }
+
+  .mydiv{
+    
+    padding-left: 0px;
+    margin-left: 10px;
+
+  }
+
+#head-text{
+    margin-left:1%;
+    margin-top:1%;
+    font-size: 5vh;
+    text-decoration: underline;
+}
+
+#details{
+    background-color: white;
+}
+
+
