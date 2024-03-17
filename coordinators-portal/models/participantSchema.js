@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const participantSchema = new mongoose.Schema({
+    regId:{
+        type: String,
+        required: true
+    },
     eMail: [{
         type: String,
         required: true
@@ -27,6 +31,6 @@ const participantSchema = new mongoose.Schema({
     }
 });
 
-const Participant = mongoose.model('Participants', participantSchema);
+const Participant = mongoose.model('participants', participantSchema);
 
 module.exports = { Participant };

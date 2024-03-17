@@ -10,7 +10,6 @@ exports.login = async (req, res) => {
         if (valid) {
             if (valid.pwd == pwd) {
                 const eventName = valid.event;
-                console.log(eventName)
                 res.redirect(`/home?eventName=${eventName}`);
             } else {
                 res.send("Incorrect Password");

@@ -27,9 +27,22 @@
                                 Actions
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/home">Home</a></li>
-                                <li><a class="dropdown-item" href="/attendance">Update attendance</a></li>
-                                <li><a class="dropdown-item" href="/winner">Update Winners</a></li>
+                                <li>
+                                    <form id="homeForm" action="/home" method="get">
+                                        <button type="submit" class="dropdown-item">Home</button>
+                                    </form>
+                                </li>
+                                <li>
+                                    <form id="attendanceForm" action="/attendance" method="get">
+                                        <input type="hidden" name="eventName" value="<%= eventName %>">
+                                        <button type="submit" class="dropdown-item">Update attendance</button>
+                                    </form>
+                                </li>
+                                <li>
+                                    <form id="winnerForm" action="/winner" method="get">
+                                        <button type="submit" class="dropdown-item">Update Winners</button>
+                                    </form>
+                                </li>
                             </ul>
                         </li>
                     </ul>

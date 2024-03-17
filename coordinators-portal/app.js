@@ -6,7 +6,7 @@ const route = require('./routes/route')
 
 
 const app = express();
-const PORT = 8000;
+const PORT = 5000;
 
 const ejs = require("ejs");
 app.set('view engine', 'ejs');
@@ -16,7 +16,6 @@ app.set('view engine', 'ejs');
 db();
 
 const root = process.cwd();
-console.log(root)
 
 app.use(bodyParser.urlencoded({extended: true}));
 
