@@ -60,6 +60,7 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
+                    <th scope="col">reg-ID</th>
                     <th scope="col">E-Mail</th>
                     <th scope="col">Name</th>
                     <th scope="col">Department</th>
@@ -70,8 +71,9 @@
             </thead>
             <tbody>
                 <% participants.forEach((participant, index) => { %>
-                    <tr>
+                    <tr class="<%= participant.attended ? 'table-success' : '' %>">
                         <th scope="row"><%= index + 1 %></th>
+                        <td><%= participant.regId %></td>
                         <td><%= participant.eMail %></td>
                         <td><%= participant.name %></td>
                         <td><%= participant.dept %></td>

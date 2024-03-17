@@ -21,7 +21,7 @@
     <header class="mx-3 my-3 poppins-regular">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container mydiv">
-                <a class="navbar-brand" href="#">Hello xxx!</a>
+                <a class="navbar-brand" href="#"> <b> <%= eventNameVal %>! </b>  </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -77,6 +77,9 @@
         <div class="enter-container">
           <h1 class="title">Enter Register Number</h1>
           <form action="/updateAttendance" method="post">
+
+            <input type="hidden" name="eventNameVal" value="<%= eventNameVal %>">
+
             <div id="otp-form">
                 <input type="number" name="digit1" id="digit1"  class="otp-input" maxlength="1">
                 <input type="number" name="digit2" id="digit2" class="otp-input" maxlength="1">
@@ -90,38 +93,7 @@
         </div>
     </section>
 
-    <section id="details" class="mx-3 my-3">
-        <table class="table" id="details-table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
-
+    
     <script>
         const form = document.querySelector("#otp-form");
         const inputs = document.querySelectorAll(".otp-input");
