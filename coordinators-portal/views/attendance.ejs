@@ -13,6 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="/css/attendance.css" rel="stylesheet">
+    <link href="/css/attendance_enter.css" rel="stylesheet">
 
 </head>
 
@@ -46,28 +47,47 @@
     </header>
 
     <section id="title">
-        <h1 class="fw-normal text-white poppins-regular" id="head-text">Presentees List</h1>
+        <h1 class="fw-normal text-white poppins-regular text-center mb-3" id="head-text">Attendance</h1>
 
     </section>
 
-    <section id="entry-form">
+    <!-- <section id="entry-form">
         <form action="/updateAttendance" method="post">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title text-center">Attendance</h5>
-                    <form>
-                        <div class="form-group">
-                            <label for="regno ">Registration number</label>
-                            <input type="text" name="name" class="form-control mb-3 " id="regno"
-                                placeholder="Enter registration number">
+                    <section>
+                        <div class="container">
+                          <h1 class="title">Enter Register Number</h1>
+                          <form action="/submit" method="post" id="otp-form">
+                            <input type="number" class="otp-input" maxlength="1">
+                            <input type="number" class="otp-input" maxlength="1">
+                            <input type="number" class="otp-input" maxlength="1">
+                            <input type="number" class="otp-input" maxlength="1">
+                          </form>
+                          <button id="verify-btn">Submit</button>
                         </div>
-                        <div class="btn-center">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </form>
+                    </section>
                 </div>
             </div>
         </form>
+    </section> -->
+
+    <section id="entry-form">
+        <div class="enter-container">
+          <h1 class="title">Enter Register Number</h1>
+          <form action="/updateAttendance" method="post">
+            <div id="otp-form">
+                <input type="number" name="digit1" id="digit1"  class="otp-input" maxlength="1">
+                <input type="number" name="digit2" id="digit2" class="otp-input" maxlength="1">
+                <input type="number" name="digit3" id="digit3" class="otp-input" maxlength="1">
+                <input type="number" name="digit4" id="digit4" class="otp-input" maxlength="1">
+            </div>
+            <div class="btn-center">
+                <button type="submit" id="verify-btn" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
     </section>
 
     <section id="details" class="mx-3 my-3">
@@ -101,11 +121,116 @@
             </tbody>
         </table>
     </section>
+
+    <script>
+        const form = document.querySelector("#otp-form");
+        const inputs = document.querySelectorAll(".otp-input");
+        const verifyBtn = document.querySelector("#verify-btn");
+
+        const isAllInputFilled = () => {
+            return Array.from(inputs).every((item) => item.value);
+        };
+
+        const getOtpText = () => {
+            let text = "";
+            inputs.forEach((input) => {
+                text += input.value;
+            });
+            return text;
+        };
+
+
+        const toggleFilledClass = (field) => {
+            if (field.value) {
+                field.classList.add("filled");
+            } else {
+                field.classList.remove("filled");
+            }
+        };
+
+        form.addEventListener("input", (e) => {
+            const target = e.target;
+            const value = target.value;
+            console.log({ target, value });
+            toggleFilledClass(target);
+            if (target.nextElementSibling) {
+                target.nextElementSibling.focus();
+            }
+        });
+
+        inputs.forEach((input, currentIndex) => {
+            // fill check
+            toggleFilledClass(input);
+
+            // paste event
+            input.addEventListener("paste", (e) => {
+                e.preventDefault();
+                const text = e.clipboardData.getData("text");
+                console.log(text);
+                inputs.forEach((item, index) => {
+                    if (index >= currentIndex && text[index - currentIndex]) {
+                        item.focus();
+                        item.value = text[index - currentIndex] || "";
+                        toggleFilledClass(item);
+                        //verifyOTP();
+                    }
+                });
+            });
+
+            // backspace event
+            input.addEventListener("keydown", (e) => {
+                if (e.keyCode === 8) {
+                    e.preventDefault();
+                    input.value = "";
+                    // console.log(input.value);
+                    toggleFilledClass(input);
+                    if (input.previousElementSibling) {
+                        input.previousElementSibling.focus();
+                    }
+                } else {
+                    if (input.value && input.nextElementSibling) {
+                        input.nextElementSibling.focus();
+                    }
+                }
+            });
+        });
+
+        // verifyBtn.addEventListener("click", () => {
+        //     const id = getOtpText();
+        //     //sendOtpToServer(id);
+        // });
+
+        // const sendOtpToServer = (otpText) => {
+        //     // Make an AJAX request to send OTP text to the server
+        //     fetch("/updateAttendance", {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json"
+        //         },
+        //         body: JSON.stringify({ otpText })
+        //     })
+        //         .then(response => {
+        //             if (!response.ok) {
+        //                 throw new Error("Network response was not ok");
+        //             }
+        //             return response.json();
+        //         })
+        //         .then(data => {
+        //             console.log("Server response:", data);
+        //             // Handle server response if needed
+        //         })
+        //         .catch(error => {
+        //             console.error("There was a problem with the fetch operation:", error);
+        //             // Handle error if needed
+        //         });
+        // };
+    </script>
+    
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-
+    <script src="../public/js/attendance_enter.js"></script>
 </body>
 
 </html>
