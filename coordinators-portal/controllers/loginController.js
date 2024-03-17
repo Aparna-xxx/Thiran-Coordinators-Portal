@@ -15,7 +15,7 @@ exports.login = async (req, res) => {
             if (valid.pwd == pwd) {
                 info = valid;
                 console.log("Authenticated");
-                eventData = await registrations.find({ event_name: "code sprint" });
+                eventData = await registrations.find({ event_name: "codesprint" });
                 console.log(eventData);
                 res.redirect("/home");
             } else {
