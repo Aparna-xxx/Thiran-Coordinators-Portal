@@ -70,62 +70,7 @@
         </table>
     </section>
 
-<<<<<<< HEAD
-              </ul>
-            </li>
-
-          </ul>
-
-
-        </div>
-      </div>
-    </nav>
-  </header>
-
-  <section id="title">
-    <h1 class="fw-normal text-white poppins-regular" id="head-text">Participant Details</h1>
-
-  </section>
-
-  <section id="details" class="mx-3 my-3">
-    <table class="table" id="details-table">
-      <thead>
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Participants</th>
-          <th scope="col">Attended</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% for (let i=0; i < event_details.length; i++) { %>
-          <tr>
-            <th scope="row">
-              <%= event_details[i]._id %>
-            </th>
-            <td>
-              <% event_details[i].participants.forEach(function(participant) { %>
-                <li>
-                  <%= participant %>
-                </li>
-                <% }); %>
-            </td>
-            <td>
-              <%= event_details[i].attended %>
-            </td>
-          </tr>
-
-          <% } %>
-      </tbody>
-    </table>
-  </section>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
-
-=======
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
->>>>>>> ba4b9005d572cf1639e90e85947b1cf548915d67
 </body>
 </html>
