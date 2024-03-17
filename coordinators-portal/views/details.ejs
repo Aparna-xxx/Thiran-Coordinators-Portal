@@ -66,33 +66,24 @@
         </tr>
       </thead>
       <tbody>
-        <% for (let i = 0; i < event_details.length; i++) { %>
+        <% for (let i=0; i < event_details.length; i++) { %>
           <tr>
-            <th scope="row"><%= event_details[i]._id %></th>
+            <th scope="row">
+              <%= event_details[i]._id %>
+            </th>
             <td>
               <% event_details[i].participants.forEach(function(participant) { %>
-                <li><%= participant %></li>
-             <% }); %>
+                <li>
+                  <%= participant %>
+                </li>
+                <% }); %>
             </td>
-            <td><%= event_details[i].attended %></td>
+            <td>
+              <%= event_details[i].attended %>
+            </td>
           </tr>
 
-       <% } %>
-        <!-- <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td >Larry the Bird</td>
-          <td>@twitter</td>
-        </tr> -->
+          <% } %>
       </tbody>
     </table>
   </section>
