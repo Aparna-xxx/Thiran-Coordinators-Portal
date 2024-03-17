@@ -1,28 +1,21 @@
 const { admin } = require('../models/adminSchema');
-const {registrations} = require("../models/registrationsSchema");
-
-let info, eventData;
+const { Participant } = require('../models/participantSchema');
 
 exports.login = async (req, res) => {
-    const { name, pwd, event_name } = req.body;
-    console.log(name,pwd)
+    const { name, pwd } = req.body;
 
     try {
         const valid = await admin.findOne({ name: name });
 
         if (valid) {
-            console.log(valid);
             if (valid.pwd == pwd) {
-                info = valid;
-                console.log("Authenticated");
-                eventData = await registrations.find({ event_name: "codesprint" });
-                console.log(eventData);
-                res.redirect("/home");
+                const eventName = valid.event;
+                console.log(eventName)
+                res.redirect(`/home?eventName=${eventName}`);
             } else {
                 res.send("Incorrect Password");
             }
         } else {
-            console.log("Not in db");
             res.send("User not found in db");
         }
     } catch (error) {
@@ -33,7 +26,13 @@ exports.login = async (req, res) => {
 
 exports.home = async (req, res) => {
     try {
-        res.render("details", {info_details: info, event_details: eventData});
+        const eventNameVal = req.query.eventName;
+        console.log(eventNameVal);
+
+        const participants = await Participant.find({ eventName: eventNameVal });
+        console.log(participants);
+
+        res.render("details", { eventName: eventNameVal, participants });
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal Server Error");
