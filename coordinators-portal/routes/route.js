@@ -3,7 +3,7 @@ const Router = express.Router();
 
 const {login, home} = require('../controllers/loginController');
 const { attendance } = require('../controllers/attendanceController');
-const { winners } = require('../controllers/winnersControllers');
+const { winners, updateWinners } = require('../controllers/winnersControllers');
 const {updateAttendance} = require('../controllers/attendanceController');
 
 
@@ -12,7 +12,7 @@ Router.post('/',login)
       .get('/attendance',attendance)
       .get('/winner',winners)
       .post('/updateAttendance',updateAttendance)
-
+      .post('/updateWinner', updateWinners)
 
 
 module.exports = Router

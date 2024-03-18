@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const winners = new mongoose.Schema({
+const winner = new mongoose.Schema({
     regId:{
         type:String,
         required: true
@@ -23,6 +23,6 @@ const winners = new mongoose.Schema({
     }
 })
 
-const winner = mongoose.model('winners', winners)
+const Winners = mongoose.model('winners', winner)
 
-module.exports = winner;
+module.exports = {Winners};

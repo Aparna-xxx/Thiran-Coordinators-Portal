@@ -58,7 +58,7 @@
           <h1 class="title">Winner</h1>
           <form action="/updateWinner" method="post">
 
-            <input type="hidden" name="eventNameVal" value="<%= eventName %>">
+            <input type="hidden" name="eventName" value="<%= eventName %>">
 
             <div id="otp-form">
                 <input type="number" name="digit1" id="digit1"  class="otp-input" maxlength="1">
@@ -69,13 +69,11 @@
 
           <h1 class="title">Runner</h1>
 
-            <input type="hidden" name="eventNameVal" value="<%= eventName %>">
-
             <div id="otp-form">
-                <input type="number" name="digit1" id="digit1"  class="otp-input" maxlength="1">
-                <input type="number" name="digit2" id="digit2" class="otp-input" maxlength="1">
-                <input type="number" name="digit3" id="digit3" class="otp-input" maxlength="1">
-                <input type="number" name="digit4" id="digit4" class="otp-input" maxlength="1">
+                <input type="number" name="digit5" id="digit1"  class="otp-input" maxlength="1">
+                <input type="number" name="digit6" id="digit2" class="otp-input" maxlength="1">
+                <input type="number" name="digit7" id="digit3" class="otp-input" maxlength="1">
+                <input type="number" name="digit8" id="digit4" class="otp-input" maxlength="1">
             </div>
             <div class="btn-center">
                 <button type="submit" id="verify-btn" class="btn btn-primary">Submit</button>
