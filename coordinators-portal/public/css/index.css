@@ -1,7 +1,7 @@
 /* #e1f4fe light blue*/
 /* #481099 violet */
 /* #6673f0 dark blue*/
-
+/* 
 #body{
 
     display: flex;
@@ -18,4 +18,50 @@
 .btn-center {
     display: flex;
     justify-content: center;
-}
+} */
+
+body {
+    margin-top: 20px;
+    background: #f6f9fc;
+  }
+  .account-block {
+    padding: 0;
+    background-image: url(./login.jpeg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 100%;
+    position: relative;
+  }
+  .account-block .overlay {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /* background-color: rgba(0, 0, 0, 0.4); */
+  }
+  .account-block .account-testimonial {
+    text-align: center;
+    color: #fff;
+    position: absolute;
+    margin: 0 auto;
+    padding: 0 1.75rem;
+    bottom: 3rem;
+    left: 0;
+    right: 0;
+  }
+  
+  .text-theme {
+    color: #6673f0 !important;
+  }
+  
+  .btn-theme {
+    width: -webkit-fill-available;
+    background-color: #6673f0 !important;
+    border-color: #5369f8 !important;
+    color: #fff !important;
+  }
+  
