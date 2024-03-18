@@ -21,23 +21,34 @@
     <header class="mx-3 my-3 poppins-regular">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container mydiv">
-                <a class="navbar-brand" href="#"> <b> <%= eventNameVal %>! </b>  </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand" href="#"> <b> <%= eventName %>! </b> </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" id="navbarDropdown"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Update
+                            <a class="nav-link dropdown-toggle" href="#" role="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                Actions
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/home">home</a></li>
-                                <li><a class="dropdown-item" href="/attendance">Update attendance</a></li>
-                                <li><a class="dropdown-item" href="/winner">Update Winners</a></li>
-
+                                <li>
+                                    <form id="homeForm" action="/home" method="get">
+                                        <input type="hidden" name="eventName" value="<%= eventName %>">
+                                        <button type="submit" class="dropdown-item">Home</button>
+                                    </form>
+                                </li>
+                                <li>
+                                    <form id="attendanceForm" action="/attendance" method="get">
+                                        <input type="hidden" name="eventName" value="<%= eventName %>">
+                                        <button type="submit" class="dropdown-item">Update attendance</button>
+                                    </form>
+                                </li>
+                                <li>
+                                    <form id="winnerForm" action="/winner" method="get">
+                                        <button type="submit" class="dropdown-item">Update Winners</button>
+                                    </form>
+                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -78,7 +89,7 @@
           <h1 class="title">Enter Register Number</h1>
           <form action="/updateAttendance" method="post">
 
-            <input type="hidden" name="eventNameVal" value="<%= eventNameVal %>">
+            <input type="hidden" name="eventNameVal" value="<%= eventName %>">
 
             <div id="otp-form">
                 <input type="number" name="digit1" id="digit1"  class="otp-input" maxlength="1">

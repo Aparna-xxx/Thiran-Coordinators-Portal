@@ -5,8 +5,8 @@ exports.updateAttendance = async (req, res) => {
     try {
         const { digit1, digit2, digit3, digit4 } = req.body;
         const regId = digit1 + digit2 + digit3 + digit4;
-        const eventNameVal = req.body.eventNameVal;
-        console.log(eventNameVal) 
+        const eventName = req.body.eventNameVal;
+        console.log(eventName) 
 
         const participant = await Participant.findOne({ regId });
 
@@ -14,8 +14,8 @@ exports.updateAttendance = async (req, res) => {
             participant.attended = true;
 
             await participant.save();
-
-            res.render('attendance', { eventNameVal });
+            
+            res.render('attendance', { eventName });
         } else {
             res.send("No user found with this registration ID");
         }
@@ -28,10 +28,11 @@ exports.updateAttendance = async (req, res) => {
 
 exports.attendance= async(req,res)=>{
     try {
-        const eventNameVal = req.query.eventName;
+        const eventName = req.query.eventName;
         // console.log(eventNameVal)
 
-        res.render('attendance' , {eventNameVal})
+        res.render('attendance' , {eventName})
+        console.log(eventName);
     } catch (error) {
         console.log(error)
     }
