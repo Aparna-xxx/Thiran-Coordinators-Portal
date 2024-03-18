@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const participantSchema = new mongoose.Schema({
+    regId:{
+        type: String,
+        required: true
+    },
     eMail: [{
         type: String,
         required: true
