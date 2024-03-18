@@ -46,6 +46,7 @@
                                 </li>
                                 <li>
                                     <form id="winnerForm" action="/winner" method="get">
+                                        <input type="hidden" name="eventName" value="<%= eventName %>">
                                         <button type="submit" class="dropdown-item">Update Winners</button>
                                     </form>
                                 </li>
@@ -177,36 +178,6 @@
                 }
             });
         });
-
-        // verifyBtn.addEventListener("click", () => {
-        //     const id = getOtpText();
-        //     //sendOtpToServer(id);
-        // });
-
-        // const sendOtpToServer = (otpText) => {
-        //     // Make an AJAX request to send OTP text to the server
-        //     fetch("/updateAttendance", {
-        //         method: "POST",
-        //         headers: {
-        //             "Content-Type": "application/json"
-        //         },
-        //         body: JSON.stringify({ otpText })
-        //     })
-        //         .then(response => {
-        //             if (!response.ok) {
-        //                 throw new Error("Network response was not ok");
-        //             }
-        //             return response.json();
-        //         })
-        //         .then(data => {
-        //             console.log("Server response:", data);
-        //             // Handle server response if needed
-        //         })
-        //         .catch(error => {
-        //             console.error("There was a problem with the fetch operation:", error);
-        //             // Handle error if needed
-        //         });
-        // };
     </script>
     
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

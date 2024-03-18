@@ -1,6 +1,7 @@
 exports.winners= async(req,res)=>{
     try {
-        res.render('winner')
+        const eventName = req.query.eventName;
+        res.render('winner', {eventName})
     } catch (error) {
         console.log(error)
     }
