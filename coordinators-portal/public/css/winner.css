@@ -6,6 +6,11 @@ body{
     background-color:#6673f0 ;
 }
 
+#title{
+    margin-left: 5px;
+    padding: 5px;
+}
+
 .poppins-regular {
     font-family: "Poppins", sans-serif;
     font-weight: 400;
@@ -17,12 +22,12 @@ body{
     left: auto;
   }
 
-  .mydiv{
-    
-    padding-left: 0px;
-    margin-left: 10px;
-
-  }
+.custom-header{
+border-radius: 25px;
+}
+.navB{
+border-radius: 25px;
+}
 
 #head-text{
     margin-left:1%;
@@ -47,4 +52,9 @@ body{
 .btn-center {
     display: flex;
     justify-content: center;
+}
+
+.navbar-nav .nav-item .dropdown-menu .dropdown-item:hover {
+    background-color: #6673f0; /* Change to the desired hover color */
+    color: white; /* Change to the desired text color */
 }
