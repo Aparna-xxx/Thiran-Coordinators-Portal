@@ -6,7 +6,7 @@ exports.updateAttendance = async (req, res) => {
         const { digit1, digit2, digit3, digit4 } = req.body;
         const regId = digit1 + digit2 + digit3 + digit4;
         const eventName = req.body.eventNameVal;
-        console.log(eventName) 
+        console.log(eventName)
 
         const participant = await Participant.findOne({ regId });
 
