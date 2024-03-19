@@ -49,3 +49,7 @@ border-radius: 25px;
   background-color: white;
 }
 
+.navbar-nav .nav-item .dropdown-menu .dropdown-item:hover {
+  background-color: #6673f0; /* Change to the desired hover color */
+  color: white; /* Change to the desired text color */
+}
