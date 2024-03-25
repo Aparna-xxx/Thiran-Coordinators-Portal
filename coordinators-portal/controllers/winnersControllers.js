@@ -48,7 +48,17 @@ exports.winners= async(req,res)=>{
     try {
         const eventName = req.query.eventName;
         console.log(eventName)
-        res.render('winner', {eventName})
+
+        const Updated = await Winners.find({eventName: eventName})
+        console.log(Updated)
+        if(Updated){
+            res.render('winnersLocked', {eventName})
+        }
+        else{
+            res.render('winner', {eventName})
+        }
+
+        
     } catch (error) {
         console.log(error)
     }

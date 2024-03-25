@@ -29,7 +29,7 @@ exports.home = async (req, res) => {
         console.log(eventNameVal);
 
         const participants = await Participant.find({ eventName: eventNameVal });
-        console.log(participants);
+        // console.log(participants);
 
         res.render("details", { eventName: eventNameVal, participants });
     } catch (error) {
