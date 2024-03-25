@@ -58,3 +58,7 @@ border-radius: 25px;
     background-color: #6673f0; /* Change to the desired hover color */
     color: white; /* Change to the desired text color */
 }
+
+.placeholder{
+    margin: 20px;
+}

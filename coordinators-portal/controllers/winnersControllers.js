@@ -38,7 +38,7 @@ exports.updateWinners = async(req,res) => {
         else{
             res.send("candidate not found in db")
         }
-    res.render('winner', {eventName})
+    res.render('winnersLocked', {eventName})
     } catch (error) {
         console.error(error)
     }
@@ -51,13 +51,13 @@ exports.winners= async(req,res)=>{
 
         const Updated = await Winners.find({eventName: eventName})
         console.log(Updated)
-        if(Updated){
-            res.render('winnersLocked', {eventName})
-        }
-        else{
+        if(Updated.length == 0){
             res.render('winner', {eventName})
         }
-
+        else{
+            const winningCandidate = await Winners.find({eventName: eventName})
+            res.render('winnersLocked', {eventName})
+        }
         
     } catch (error) {
         console.log(error)
