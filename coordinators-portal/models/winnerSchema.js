@@ -1,10 +1,6 @@
 const mongoose = require('mongoose')
 
 const winner = new mongoose.Schema({
-    regId:{
-        type:String,
-        required: true
-    },
     name:[{
         type:String,
         required: true

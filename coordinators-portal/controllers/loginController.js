@@ -1,5 +1,7 @@
 const { admin } = require('../models/adminSchema');
-const { Participant } = require('../models/participantSchema');
+// const { Participant } = require('../models/participantSchema');
+const { Registrations } = require('../models/registrationsSchema');
+const {Students} = require('../models/studentSchema')
 
 exports.login = async (req, res) => {
     const { name, pwd } = req.body;
@@ -23,18 +25,39 @@ exports.login = async (req, res) => {
     }
 };
 
+
+
 exports.home = async (req, res) => {
     try {
         const eventNameVal = req.query.eventName;
         console.log(eventNameVal);
 
-        const participants = await Participant.find({ eventName: eventNameVal });
-        // console.log(participants);
+        const registrations = await Registrations.find({ event_name: eventNameVal });
 
-        res.render("details", { eventName: eventNameVal, participants });
+        const participants = registrations.flatMap(participant => participant.participants);//mail from registrations
+        console.log(participants)
+
+        const students = await Students.find({ email: { $in: participants } });//mapping mail from reg and stu collections
+        console.log("from students : ", students);
+        
+        // merging data of reg and stu collection
+        const mergedData = registrations.map(registration => {
+            const matchingStudents = students.filter(student => registration.participants.includes(student.email));
+            return matchingStudents.map(student => ({
+                _id: registration._id,
+                attended: registration.attended,
+                name: student.name,
+                email: student.email,
+                dept: student.programme,
+                year: student.year
+            }));
+        }).flat();
+
+        console.log("Merged Data: ", mergedData);
+
+        res.render("details", { eventName: eventNameVal, participants: mergedData });
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal Server Error");
     }
 };
-

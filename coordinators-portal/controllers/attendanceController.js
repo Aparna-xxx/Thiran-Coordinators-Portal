@@ -1,14 +1,18 @@
-const { Participant } = require('../models/participantSchema');
-
+// const { Participant } = require('../models/participantSchema');
+const { Registrations } = require('../models/registrationsSchema');
 
 exports.updateAttendance = async (req, res) => {
     try {
         const { digit1, digit2, digit3, digit4 } = req.body;
-        const regId = digit1 + digit2 + digit3 + digit4;
+        const Id = digit1 + digit2 + digit3 + digit4;
         const eventName = req.body.eventNameVal;
-        console.log(eventName)
+        console.log(eventName);
 
-        const participant = await Participant.findOne({ regId });
+        // const participant = await Registrations.find({ event_name :eventName });
+        // console.log(participant)
+
+        const participant = await Registrations.findOne({ _id: Id });
+        console.log(participant)
 
         if (participant) {
             participant.attended = true;

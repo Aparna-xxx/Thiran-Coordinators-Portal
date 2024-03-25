@@ -1,12 +1,12 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
-const registrationsSchema = new mongoose.Schema({
-    
-    "event_name": {type: String, required: true}, 
-    "participants": [{type: String}] ,
-    "attended": {type: Boolean, required: true}, 
-  })
+const registrationSchema = new mongoose.Schema({
+    _id: String, // We'll use this as the registration ID
+    event_name: { type: String, required: true },
+    participants: { type: [String], required: true },
+    attended: { type: Boolean, default: false }
+  });
 
-const registrations = mongoose.model('registrations', registrationsSchema)
+const Registrations = mongoose.model('Registration', registrationSchema);
 
-module.exports = {registrations}
+module.exports = {Registrations};

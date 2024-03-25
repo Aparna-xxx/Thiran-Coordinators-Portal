@@ -1,4 +1,6 @@
-const { Participant } = require('../models/participantSchema');
+// const { Participant } = require('../models/participantSchema');
+const { Students } = require('../models/studentSchema')
+const { Registrations } = require('../models/registrationsSchema')
 const { Winners } = require('../models/winnerSchema');
 
 exports.updateWinners = async(req,res) => {
@@ -7,42 +9,92 @@ exports.updateWinners = async(req,res) => {
         const winnerId = digit1 + digit2 + digit3 + digit4;
         const runnerId = digit5 + digit6 + digit7 + digit8;
 
-        const winningCandidate = await Participant.findOne({regId : winnerId})
-        if(winningCandidate){
-            const newWinner = new Winners({
-                regId: winningCandidate.regId,
-                name: winningCandidate.name,
-                dept: winningCandidate.dept,
-                eventName: winningCandidate.eventName,
-                place:"winner"
-            })
-            console.log(newWinner)
+        const winningCandidate = await Registrations.findOne({ _id : winnerId });
+        // console.log(winningCandidate);
+
+        const winnersEmails = winningCandidate.participants; // Mails from registrations
+        // console.log(winnersEmails);
+
+        const winningStudents = await Students.find({ email: { $in: winnersEmails } }); // Mapping mail from reg and stu collections
+        // console.log("from students : ", winningStudents);
+
+        if(winningStudents && winningStudents.length > 0) {
+            // Combine data from students belonging to the same team
+            const combinedDataWinner = winningStudents.reduce((acc, student) => {
+                if (!acc.name) {
+                    acc.name = student.name;
+                    acc.dept = student.programme;
+                } else {
+            // Combine names and departments of students belonging to the same team
+                    acc.name += `, ${student.name}`;
+                    acc.dept += `, ${student.programme}`;
+                }
+            return acc;
+        }, {});
+
+        // console.log(combinedDataWinner)
+
+        const newWinner = new Winners({
+        name: combinedDataWinner.name,
+        dept: combinedDataWinner.dept,
+        eventName: winningCandidate.event_name,
+        place: "winner"
+        });
+            console.log(newWinner);
             await newWinner.save();
-        }
-        else{
-            res.send("candidate not found in db")
+        } else {
+            res.send("Candidates not found in database");
         }
 
-        const runnerCandidate = await Participant.findOne({regId : runnerId})
-        if(runnerCandidate){
-            const newRunner = new Winners({
-                regId: runnerCandidate.regId,
-                name: runnerCandidate.name,
-                dept: runnerCandidate.dept,
-                eventName: runnerCandidate.eventName,
-                place:"runner"
-            })
-            console.log(newRunner)
-            await newRunner.save();
+
+
+        const runnerCandidate = await Registrations.findOne({ _id : runnerId})
+        // console.log(runnerCandidate)
+
+        const runnersEmails = runnerCandidate.participants;
+
+        const runningStudents = await Students.find({ email: { $in: runnersEmails } });
+
+        
+        if(runningStudents && runningStudents.length > 0) {
+            // Combine data from students belonging to the same team
+            const combinedDataRunner = runningStudents.reduce((acc, student) => {
+                if (!acc.name) {
+                    acc.name = student.name;
+                    acc.dept = student.programme;
+                } else {
+            // Combine names and departments of students belonging to the same team
+                    acc.name += `, ${student.name}`;
+                    acc.dept += `, ${student.programme}`;
+                }
+            return acc;
+        }, {});
+
+        // console.log(combinedDataRunner)
+
+        const newRunner = new Winners({
+        name: combinedDataRunner.name,
+        dept: combinedDataRunner.dept,
+        eventName: runnerCandidate.event_name,
+        place: "runner"
+        });
+        console.log(newRunner);
+        await newRunner.save();
+        } else {
+            res.send("Candidates not found in database");
         }
-        else{
-            res.send("candidate not found in db")
+
+
+        //to render updated winner Page
+        const winningC = await Winners.findOne({ eventName: eventName, place : "winner" });
+        const runnerC = await Winners.findOne({ eventName: eventName, place : "runner" });
+
+
+        res.render('winnersLocked', {eventName, winningCandidate : winningC, runnerCandidate : runnerC})
+        } catch (error) {
+            console.error(error)
         }
-        res.render('winnersLocked', {eventName, winningCandidate, runnerCandidate})
-    } catch (error) {
-        console.error(error)
     }
-}
 
 exports.winners = async (req, res) => {
     try {
@@ -51,7 +103,6 @@ exports.winners = async (req, res) => {
 
         const winningCandidate = await Winners.findOne({ eventName: eventName, place : "winner" });
         const runnerCandidate = await Winners.findOne({ eventName: eventName, place : "runner" });
-        console.log(winningCandidate);
 
         if (winningCandidate && runnerCandidate) {
             res.render('winnersLocked', { eventName, winningCandidate, runnerCandidate });
