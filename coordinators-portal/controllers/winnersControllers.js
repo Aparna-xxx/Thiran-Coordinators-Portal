@@ -38,28 +38,29 @@ exports.updateWinners = async(req,res) => {
         else{
             res.send("candidate not found in db")
         }
-    res.render('winnersLocked', {eventName})
+        res.render('winnersLocked', {eventName, winningCandidate, runnerCandidate})
     } catch (error) {
         console.error(error)
     }
 }
 
-exports.winners= async(req,res)=>{
+exports.winners = async (req, res) => {
     try {
         const eventName = req.query.eventName;
         console.log(eventName)
 
-        const Updated = await Winners.find({eventName: eventName})
-        console.log(Updated)
-        if(Updated.length == 0){
-            res.render('winner', {eventName})
-        }
-        else{
-            const winningCandidate = await Winners.find({eventName: eventName})
-            res.render('winnersLocked', {eventName})
+        const winningCandidate = await Winners.findOne({ eventName: eventName, place : "winner" });
+        const runnerCandidate = await Winners.findOne({ eventName: eventName, place : "runner" });
+        console.log(winningCandidate);
+
+        if (winningCandidate && runnerCandidate) {
+            res.render('winnersLocked', { eventName, winningCandidate, runnerCandidate });
+        } else {
+            res.render('winner', { eventName });
         }
         
     } catch (error) {
-        console.log(error)
+        console.log(error);
+        res.status(500).send("Internal Server Error");
     }
 }
