@@ -23,21 +23,27 @@ exports.updateWinners = async(req,res) => {
             const combinedDataWinner = winningStudents.reduce((acc, student) => {
                 if (!acc.name) {
                     acc.name = student.name;
-                    acc.dept = student.programme;
+                    acc.prog = student.programme;
+                    acc.dept = student.department;
+                    acc.phone = student.phone;
                 } else {
             // Combine names and departments of students belonging to the same team
                     acc.name += `, ${student.name}`;
-                    acc.dept += `, ${student.programme}`;
+                    acc.prog += `, ${student.programme}`;
+                    acc.dept += `, ${student.department}`;
+                    acc.phone += `, ${student.phone}`;
                 }
             return acc;
         }, {});
 
-        // console.log(combinedDataWinner)
+        console.log(combinedDataWinner)
 
         const newWinner = new Winners({
         name: combinedDataWinner.name,
         dept: combinedDataWinner.dept,
+        programme: combinedDataWinner.prog,
         eventName: winningCandidate.event_name,
+        phone: combinedDataWinner.phone,
         place: "winner"
         });
             console.log(newWinner);
@@ -49,7 +55,7 @@ exports.updateWinners = async(req,res) => {
 
 
         const runnerCandidate = await Registrations.findOne({ _id : runnerId})
-        // console.log(runnerCandidate)
+        console.log(runnerCandidate)
 
         const runnersEmails = runnerCandidate.participants;
 
@@ -61,11 +67,15 @@ exports.updateWinners = async(req,res) => {
             const combinedDataRunner = runningStudents.reduce((acc, student) => {
                 if (!acc.name) {
                     acc.name = student.name;
-                    acc.dept = student.programme;
+                    acc.prog = student.programme;
+                    acc.dept = student.department;
+                    acc.phone = student.phone;
                 } else {
             // Combine names and departments of students belonging to the same team
                     acc.name += `, ${student.name}`;
-                    acc.dept += `, ${student.programme}`;
+                    acc.prog += `, ${student.programme}`;
+                    acc.dept += `, ${student.department}`;
+                    acc.phone += `, ${student.phone}`;
                 }
             return acc;
         }, {});
@@ -75,7 +85,9 @@ exports.updateWinners = async(req,res) => {
         const newRunner = new Winners({
         name: combinedDataRunner.name,
         dept: combinedDataRunner.dept,
+        programme: combinedDataRunner.prog,
         eventName: runnerCandidate.event_name,
+        phone: combinedDataRunner.phone,
         place: "runner"
         });
         console.log(newRunner);

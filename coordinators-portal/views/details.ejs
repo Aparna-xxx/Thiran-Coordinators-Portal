@@ -76,7 +76,7 @@
                     <th scope="col">E-Mail</th>
                     <th scope="col">Name</th>
                     <th scope="col">Department</th>
-                    <th scope="col">Year</th>
+                    <th scope="col">Phone</th>
                     <th scope="col">Attended</th>
 
                 </tr>
@@ -98,9 +98,11 @@
                         </td>
                         <td>
                             <%= participant.dept %>
+                            <%= participant.prog %> -
+                            <%= participant.year %>
                         </td>
                         <td>
-                            <%= participant.year %>
+                            <%= participant.phone %>
                         </td>
                         <td>
                             <%= participant.attended %>

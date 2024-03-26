@@ -48,7 +48,9 @@ exports.home = async (req, res) => {
                 attended: registration.attended,
                 name: student.name,
                 email: student.email,
-                dept: student.programme,
+                prog: student.programme,
+                dept: student.department,
+                phone: student.phone,
                 year: student.year
             }));
         }).flat();
