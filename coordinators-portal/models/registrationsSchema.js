@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const registrationSchema = new mongoose.Schema({
-    _id: String, // We'll use this as the registration ID
+    _id: Number, // We'll use this as the registration ID
     event_name: { type: String, required: true },
     participants: { type: [String], required: true },
     attended: { type: Boolean, default: false }
