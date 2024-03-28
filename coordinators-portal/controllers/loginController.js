@@ -16,7 +16,7 @@ exports.login = async (req, res) => {
                 if(eventName == "STAR OF THIRAN"){
                     res.redirect(`/starHome?eventName=${eventName}`);
                 }
-                else if(eventName == "Secretary"){
+                else if(eventName == "THIRAN - 2K24"){
                     res.redirect(`/adminHome?eventName=${eventName}`);
                 }
                  else{
