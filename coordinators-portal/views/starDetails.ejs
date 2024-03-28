@@ -37,20 +37,20 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end bg-black" aria-labelledby="navbarDropdown">
                                 <li>
-                                    <form id="homeForm" action="/home" method="get">
+                                    <form id="homeForm" action="/starHome" method="get">
                                         <input type="hidden" name="eventName" value="<%= eventName %>">
                                         <button type="submit" class="dropdown-item text-white">Home</button>
                                     </form>
                                 </li>
                                 <li>
-                                    <form id="attendanceForm" action="/attendance" method="get">
+                                    <form id="attendanceForm" action="/starAttendance" method="get">
                                         <input type="hidden" name="eventName" value="<%= eventName %>">
                                         <button type="submit" class="dropdown-item text-white">Update
                                             attendance</button>
                                     </form>
                                 </li>
                                 <li>
-                                    <form id="winnerForm" action="/winner" method="get">
+                                    <form id="winnerForm" action="/starWinner" method="get">
                                         <input type="hidden" name="eventName" value="<%= eventName %>">
                                         <button type="submit" class="dropdown-item text-white">Update Winners</button>
                                     </form>
@@ -72,41 +72,43 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">reg-ID</th>
-                    <th scope="col">E-Mail</th>
+                    <th scope="col">regId</th>
                     <th scope="col">Name</th>
+                    <th scope="col">Event Name</th>
                     <th scope="col">Department</th>
+                    <th scope="col">Place</th>
                     <th scope="col">Phone</th>
                     <th scope="col">Attended</th>
 
                 </tr>
             </thead>
             <tbody>
-                <% participants.forEach((participant, index)=> { %>
-                    <tr class="<%= participant.attended ? 'table-success' : '' %>">
+                <% winners.forEach((winners, index)=> { %>
+                    <tr class="<%= winners.attended ? 'table-success' : '' %>">
                         <th scope="row">
                             <%= index + 1 %>
                         </th>
                         <td>
-                            <%= participant._id %>
+                            <%= winners._id %>
                         </td>
                         <td>
-                            <%= participant.email %>
+                            <%= winners.name %>
                         </td>
                         <td>
-                            <%= participant.name %>
+                            <%= winners.eventName %>
                         </td>
                         <td>
-                            
-                            <%= participant.prog %>
-                            <%= participant.dept %> -
-                            <%= participant.year %>
+                            <%= winners.dept %>
+                            <%= winners.programme %>
                         </td>
                         <td>
-                            <%= participant.phone %>
+                            <%= winners.place %>
                         </td>
                         <td>
-                            <%= participant.attended %>
+                            <%= winners.phone %>
+                        </td>
+                        <td>
+                            <%= winners.attended %>
                         </td>
                     </tr>
                     <% }); %>

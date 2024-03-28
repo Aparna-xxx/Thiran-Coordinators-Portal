@@ -1,6 +1,10 @@
 const mongoose = require('mongoose')
 
 const winner = new mongoose.Schema({
+    _id:{
+        type: Number,
+        required: true
+    },
     name:[{
         type:String,
         required: true
@@ -24,6 +28,10 @@ const winner = new mongoose.Schema({
     place:{
         type:String,
         required: true
+    },
+    attended:{
+        type:Boolean,
+        default: false
     }
 })
 

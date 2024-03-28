@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Participant details</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="/css/winner.css" rel="stylesheet">
+    <link href="/css/attendance_enter.css" rel="stylesheet">
+    
+</head>
+<body>
+    <header class="mx-3 my-3 poppins-regular bg-white custom-header">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white navB">
+            <div class="container mydiv">
+                <a class="navbar-brand text-black" href="#"> <b>
+                        <%= eventName %>!
+                    </b> </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-black" href="#" role="button" id="navbarDropdown"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Actions
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end bg-black" aria-labelledby="navbarDropdown">
+                                <li>
+                                    <form id="homeForm" action="/starHome" method="get">
+                                        <input type="hidden" name="eventName" value="<%= eventName %>">
+                                        <button type="submit" class="dropdown-item text-white">Home</button>
+                                    </form>
+                                </li>
+                                <li>
+                                    <form id="attendanceForm" action="/starAttendance" method="get">
+                                        <input type="hidden" name="eventName" value="<%= eventName %>">
+                                        <button type="submit" class="dropdown-item text-white">Update
+                                            attendance</button>
+                                    </form>
+                                </li>
+                                <li>
+                                    <form id="winnerForm" action="/starWinner" method="get">
+                                        <input type="hidden" name="eventName" value="<%= eventName %>">
+                                        <button type="submit" class="dropdown-item text-white">Update Winners</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section id="winner-form">
+        <div class="enter-container">
+          <h1 class="title">Winner</h1>
+          <form action="/updateStarWinner" method="post">
+
+            <input type="hidden" name="eventName" value="<%= eventName %>">
+
+            <div id="otp-form">
+                <input type="number" name="digit1" id="digit1"  class="otp-input" maxlength="1">
+                <input type="number" name="digit2" id="digit2" class="otp-input" maxlength="1">
+                <input type="number" name="digit3" id="digit3" class="otp-input" maxlength="1">
+                <input type="number" name="digit4" id="digit4" class="otp-input" maxlength="1">
+            </div>
+
+          <!-- <h1 class="title">Runner</h1>
+
+            <div id="otp-form">
+                <input type="number" name="digit5" id="digit1"  class="otp-input" maxlength="1">
+                <input type="number" name="digit6" id="digit2" class="otp-input" maxlength="1">
+                <input type="number" name="digit7" id="digit3" class="otp-input" maxlength="1">
+                <input type="number" name="digit8" id="digit4" class="otp-input" maxlength="1">
+            </div> -->
+            <div class="btn-center">
+                <button type="submit" id="verify-btn" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+    </section>
+
+    <script>
+        const form = document.querySelector("#otp-form");
+        const inputs = document.querySelectorAll(".otp-input");
+        const verifyBtn = document.querySelector("#verify-btn");
+
+        const isAllInputFilled = () => {
+            return Array.from(inputs).every((item) => item.value);
+        };
+
+        const getOtpText = () => {
+            let text = "";
+            inputs.forEach((input) => {
+                text += input.value;
+            });
+            return text;
+        };
+
+
+        const toggleFilledClass = (field) => {
+            if (field.value) {
+                field.classList.add("filled");
+            } else {
+                field.classList.remove("filled");
+            }
+        };
+
+        form.addEventListener("input", (e) => {
+            const target = e.target;
+            const value = target.value;
+            console.log({ target, value });
+            toggleFilledClass(target);
+            if (target.nextElementSibling) {
+                target.nextElementSibling.focus();
+            }
+        });
+
+        inputs.forEach((input, currentIndex) => {
+            // fill check
+            toggleFilledClass(input);
+
+            // paste event
+            input.addEventListener("paste", (e) => {
+                e.preventDefault();
+                const text = e.clipboardData.getData("text");
+                console.log(text);
+                inputs.forEach((item, index) => {
+                    if (index >= currentIndex && text[index - currentIndex]) {
+                        item.focus();
+                        item.value = text[index - currentIndex] || "";
+                        toggleFilledClass(item);
+                        //verifyOTP();
+                    }
+                });
+            });
+
+            // backspace event
+            input.addEventListener("keydown", (e) => {
+                if (e.keyCode === 8) {
+                    e.preventDefault();
+                    input.value = "";
+                    // console.log(input.value);
+                    toggleFilledClass(input);
+                    if (input.previousElementSibling) {
+                        input.previousElementSibling.focus();
+                    }
+                } else {
+                    if (input.value && input.nextElementSibling) {
+                        input.nextElementSibling.focus();
+                    }
+                }
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+</body>
+</html>

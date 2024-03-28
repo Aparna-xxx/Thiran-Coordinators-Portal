@@ -12,7 +12,17 @@ exports.login = async (req, res) => {
         if (valid) {
             if (valid.pwd == pwd) {
                 const eventName = valid.event;
-                res.redirect(`/home?eventName=${eventName}`);
+
+                if(eventName == "STAR OF THIRAN"){
+                    res.redirect(`/starHome?eventName=${eventName}`);
+                }
+                else if(eventName == "Secretary"){
+                    res.redirect(`/adminHome?eventName=${eventName}`);
+                }
+                 else{
+                    res.redirect(`/home?eventName=${eventName}`);
+                }
+
             } else {
                 res.send("Incorrect Password");
             }

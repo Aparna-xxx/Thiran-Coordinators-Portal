@@ -4,8 +4,12 @@ const {db} = require('./db')
 const bodyParser = require('body-parser')
 const route = require('./routes/route')
 require('dotenv').config()
+const cors = require('cors');
 
 const app = express();
+
+app.use(cors());
+
 const PORT = process.env.PORT  || 5000;
 
 const ejs = require("ejs");

@@ -32,20 +32,20 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end bg-black" aria-labelledby="navbarDropdown">
                                 <li>
-                                    <form id="homeForm" action="/home" method="get">
+                                    <form id="homeForm" action="/starHome" method="get">
                                         <input type="hidden" name="eventName" value="<%= eventName %>">
                                         <button type="submit" class="dropdown-item text-white">Home</button>
                                     </form>
                                 </li>
                                 <li>
-                                    <form id="attendanceForm" action="/attendance" method="get">
+                                    <form id="attendanceForm" action="/starAttendance" method="get">
                                         <input type="hidden" name="eventName" value="<%= eventName %>">
                                         <button type="submit" class="dropdown-item text-white">Update
                                             attendance</button>
                                     </form>
                                 </li>
                                 <li>
-                                    <form id="winnerForm" action="/winner" method="get">
+                                    <form id="winnerForm" action="/starWinner" method="get">
                                         <input type="hidden" name="eventName" value="<%= eventName %>">
                                         <button type="submit" class="dropdown-item text-white">Update Winners</button>
                                     </form>
@@ -63,7 +63,7 @@
 
     <section id="winner-form">
         <div class="enter-container">
-          <h1 class="title">Winner</h1>
+          <h1 class="title">STAR OF THIRAN - Winner</h1>
           <div class="details-container">
             <div class="details">
                   <p><b>Names :</b> <%= winningCandidate.name %></p>
@@ -76,19 +76,6 @@
 
     <div class="placeholder">
     </div>
-
-    <section id="winner-form">
-        <div class="enter-container">
-          <h1 class="title">Runner</h1>
-                <div class="details-container">
-                    <div class="details">
-                        <p><b>Names :</b> <%= runnerCandidate.name %></p>
-                        <p><b>Department :</b> <%= runnerCandidate.dept %>  <%= runnerCandidate.programme %></p>
-                        <p><b>Phone :</b> <%= runnerCandidate.phone %></p>
-                    </div>
-                </div>
-        </div>
-    </section>
 
     <div class="placeholder">
     </div>

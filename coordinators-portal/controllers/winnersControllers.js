@@ -36,9 +36,10 @@ exports.updateWinners = async(req,res) => {
             return acc;
         }, {});
 
-        console.log(combinedDataWinner)
+        // console.log(combinedDataWinner)
 
         const newWinner = new Winners({
+        _id: winningCandidate._id,
         name: combinedDataWinner.name,
         dept: combinedDataWinner.dept,
         programme: combinedDataWinner.prog,
@@ -46,7 +47,7 @@ exports.updateWinners = async(req,res) => {
         phone: combinedDataWinner.phone,
         place: "winner"
         });
-            console.log(newWinner);
+            // console.log(newWinner);
             await newWinner.save();
         } else {
             res.send("Candidates not found in database");
@@ -55,7 +56,7 @@ exports.updateWinners = async(req,res) => {
 
 
         const runnerCandidate = await Registrations.findOne({ _id : runnerId})
-        console.log(runnerCandidate)
+        // console.log(runnerCandidate)
 
         const runnersEmails = runnerCandidate.participants;
 
@@ -83,6 +84,7 @@ exports.updateWinners = async(req,res) => {
         // console.log(combinedDataRunner)
 
         const newRunner = new Winners({
+        _id: runnerCandidate._id,
         name: combinedDataRunner.name,
         dept: combinedDataRunner.dept,
         programme: combinedDataRunner.prog,
@@ -90,7 +92,7 @@ exports.updateWinners = async(req,res) => {
         phone: combinedDataRunner.phone,
         place: "runner"
         });
-        console.log(newRunner);
+        // console.log(newRunner);
         await newRunner.save();
         } else {
             res.send("Candidates not found in database");

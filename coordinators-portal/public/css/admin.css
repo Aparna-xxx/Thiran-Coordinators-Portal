@@ -1,0 +1,122 @@
+*{
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+:root {
+  --accent-color: #fff;
+  --gradient-color: #FBFBFB;
+}
+
+body{
+  overflow-x: hidden;
+  background-color: #6673f0;
+  display: flex;
+  flex-direction: row;
+}
+
+.sidebar{
+  position: fixed;
+  width: 240px;
+  left: -30px;
+  height: 100%;
+  overflow-y: hidden;
+  background-color: #fff;
+  transition: all .5s ease;
+}
+.sidebar header{
+  font-size: 28px;
+  color: #353535;
+  line-height: 70px;
+  text-align: center;
+  background-color: #fff;
+  user-select: none;
+  font-family: "Poppins", sans-serif;
+}
+.sidebar .menu-item{
+  display: block;
+  height: 58px;
+  width: 100%;
+  color: #353535;
+  line-height: 65px;
+  padding-left: 30px;
+  box-sizing: border-box;
+  border-left: 5px solid transparent;
+  font-family: "Poppins", sans-serif;
+  transition: all .5s ease;
+}
+.menu-item.active, .menu-item:hover{
+  border-left: 5px solid var(--accent-color);
+  color: #6673f0;
+  background: linear-gradient(to left, var(--accent-color), var(--gradient-color));
+}
+.sidebar .menu-item .btn{
+  font-size: 15px;
+  font-family: "Poppins", sans-serif;
+  margin-right: 16px;
+  border: none; 
+}
+.sidebar .menu-item span{
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+@media(max-width : 860px){
+  .sidebar{
+    height: auto;
+    width: 70px;
+    left: 0;
+    margin: 100px 0;
+  }
+  
+  .sidebar .menu-item{
+    height: 60px;
+  }
+  .sidebar .menu-item .btn{
+    margin-left: 20px;
+  }
+  .menu-item:hover {
+    width: 200px;
+    background: inherit;
+  }
+  .sidebar .menu-item:hover span{
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.sidebar > .menu-item{
+  background-color: #6673f0;
+}
+
+.sidebar > .menu-item.active,.sidebar > .menu-item:hover {
+  background-color: #FBFBFB;
+}
+
+#title{
+  padding: 5px;
+}
+
+#title #head-text{
+  text-decoration: none;
+  margin-left: 7px;
+  font-weight: 500 !important;
+  color: black !important;
+  background-color: #6673f0 ;
+  padding: 5px 21px;
+  border: 2px solid white;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+}
+
+#content{
+  display: flex;
+  flex-direction: column;
+  margin-left: 200px;
+  margin-top: 10px;
+}
+
+.btn{
+  padding: 20px;
+}
